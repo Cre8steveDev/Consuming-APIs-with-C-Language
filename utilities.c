@@ -1,31 +1,4 @@
 #include "quotes.h"
-
-/**
- * write_callback - Function that is called to for the write data
- * It returns the correct size of bytes being red from the response
- * @contents:
- */
-size_t write_callback(char *ptr, size_t size, size_t nmemb, void *data_struct)
-{
-	size_t data_size = ((string *)data_struct)->len + size * nmemb;
-
-	// Free the initial 1 byte assigned
-	free(((string *)data_struct)->data);
-
-	// Duplicate the string received from the serve to the struct
-	((string *)data_struct)->data = strdup(ptr);
-
-	// If allocation fails, then exit
-	if (((string *)data_struct)->data == NULL)
-	{
-		fprintf(stderr, "Memory allocation for duplication failed");
-		exit(EXIT_FAILURE);
-	}
-
-	// Return the received size of the data back
-	return size * nmemb;
-}
-
 /**
  * print_initial_ui - Prints the introductory UI on the screen
  * Return - void
@@ -33,21 +6,34 @@ size_t write_callback(char *ptr, size_t size, size_t nmemb, void *data_struct)
 
 void print_initial_ui(void)
 {
-	printf("\n\n\t========================================================\n");
+	printf("\n\n========================================================\n");
 	printf("\033[0;34m");
-	printf("\tWelcome to the Interactive Random Quotes Generator\n");
+	printf("Welcome to the Interactive Random Quotes Generator\n");
 	printf("\033[0m");
-	printf("\t========================================================\n");
+	printf("========================================================\n");
 
-	printf("\tChoose an option from the list (Pick a number):\n");
+	printf("Choose an option from the list (Pick a number):\n");
 	printf("\033[0;32m");
-	printf("\t1. Single Random Quote\n");
-	printf("\t2. Multiple Random Quotes\n");
-	printf("\t3. Save a Single Quote to File\n");
-	printf("\t4. Save Multiple Quotes to file\n");
-	printf("\t5. Press any other key to exit\n\n");
+	printf("1. Single Random Quote\n");
+	printf("2. Multiple Random Quotes\n");
+	printf("3. Save a Single Quote to File\n");
+	printf("4. Save Multiple Quotes to file\n");
+	printf("5. Press any other key to exit\n\n");
 	printf("\033[0m");
 }
+
+// Here are some common color codes:
+
+// - `\033[0;31m` - Red
+// - `\033[0;32m` - Green
+// - `\033[0;33m` - Yellow
+// - `\033[0;34m` - Blue
+// - `\033[0;35m` - Magenta
+// - `\033[0;36m` - Cyan
+// - `\033[0;37m` - White
+// -  `\033[0m` - resets the color
+
+// Remember to reset the color to default after you're done with colored output. If you don't, the color will affect all subsequent text output to the terminal.
 
 /**
  * print_fake_app_loading - Prints a fake app loading count

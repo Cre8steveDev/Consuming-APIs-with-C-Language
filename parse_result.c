@@ -20,10 +20,11 @@ char *parse_result(char *result)
 	if (!root)
 	{
 		fprintf(stderr, "error: on line %d: %s\n", error.line, error.text);
+		free(result);
+		printf("Try again\n");
 		return NULL;
 	}
 
-	// Get the "content" and "author" values
 	content = json_object_get(root, "content");
 	author = json_object_get(root, "author");
 
@@ -31,6 +32,7 @@ char *parse_result(char *result)
 	{
 		fprintf(stderr, "error: content or author is not a string\n");
 		json_decref(root);
+		free(result);
 		return NULL;
 	}
 
@@ -42,23 +44,13 @@ char *parse_result(char *result)
 	{
 		fprintf(stderr, "error: could not allocate memory for cleaned_result\n");
 		json_decref(root);
+		free(result);
+		printf("Try again\n");
 		return NULL;
 	}
 
 	// Construct the cleaned result
-	sprintf(cleaned_result, "%s\n\t%s%s", content_str, pad_string, author_str);
-	printf("%s\n", cleaned_result);
-
-	file = fopen("output.txt", "w");
-
-	if (file == NULL)
-	{
-		printf("Error opening file!\n");
-		return 1;
-	}
-
-	fprintf(file, "%s\n", cleaned_result);
-	fclose(file);
+	sprintf(cleaned_result, "%s\n%s%s", content_str, pad_string, author_str);
 
 	// Clean up json handler
 	json_decref(root);

@@ -20,17 +20,17 @@ int main(int argc, char const **argv)
 		char user_option = 'x';
 
 		// Retrieve User's choice
-		printf("\t");
 		scanf(" %c", &user_option);
 		printf("\n\t");
+
+		system("clear");
 
 		// Match the choice to an action
 		switch (user_option)
 		{
 		case '1':
-			temp = handle_single_quote();
-			if (temp)
-				free(temp);
+			printf("Loading quotes...\n");
+			handle_single_quote();
 			break;
 		case '2':
 			printf("User wants Multiple Random Quotes");
@@ -43,9 +43,9 @@ int main(int argc, char const **argv)
 			break;
 		default:
 			continue_prog = 0;
-			system("clear");
 			break;
 		}
+		// system("clear");
 		// printf("\nPick Option again for a new quote.\n");
 		// scanf("%c", &user_option);
 		// print_fake_app_loading();

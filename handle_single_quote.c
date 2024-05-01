@@ -5,13 +5,13 @@
  * Return - a String of the data retrieved and parsed
  */
 
-char *handle_single_quote()
+void handle_single_quote()
 {
 	CURL *curl;
 	CURLcode response;
 	char *sendOUtData;
 
-	static string data_struct;
+	string data_struct;
 	data_struct.data = malloc(1);
 	data_struct.len = 0;
 
@@ -27,12 +27,16 @@ char *handle_single_quote()
 		curl_easy_setopt(curl, CURLOPT_WRITEDATA, &data_struct);
 
 		response = curl_easy_perform(curl);
+
+		sendOUtData = parse_result(data_struct.data);
+		printf("\n%s\n", sendOUtData);
+
+		free(sendOUtData);
 		curl_easy_cleanup(curl);
-		parse_result(data_struct.data);
-		return data_struct.data;
+		return;
 	}
 
 	printf("\n\nSorry, an error occured");
 	system("clear");
-	return NULL;
+	return;
 }

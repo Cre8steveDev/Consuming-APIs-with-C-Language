@@ -29,8 +29,9 @@ typedef struct
 void print_fake_app_loading(void);
 void print_initial_ui(void);
 char *parse_result(char *result);
+void print_with_max_line_length(const char *str, int max_line_length);
 
 size_t write_callback(char *ptr, size_t size, size_t nmemb, void *data_struct);
-char *handle_single_quote();
+void handle_single_quote();
 
 #endif /**Quotes Header File*/
