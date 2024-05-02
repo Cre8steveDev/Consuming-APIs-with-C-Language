@@ -33,5 +33,8 @@ void print_with_max_line_length(const char *str, int max_line_length);
 
 size_t write_callback(char *ptr, size_t size, size_t nmemb, void *data_struct);
 void handle_single_quote();
+void handle_custom_number_quotes();
+void handle_custom_number_quotes_to_file();
+int write_to_file(char *file_name, char *content);
 
 #endif /**Quotes Header File*/

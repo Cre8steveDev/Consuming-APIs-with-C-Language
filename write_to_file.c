@@ -11,13 +11,13 @@ int write_to_file(char *file_name, char *content)
 {
 	FILE *file = NULL;
 
-	file = fopen(file_name, "w");
+	file = fopen(file_name, "a");
 
 	if (file == NULL)
 	{
 		printf("\nError opening file!\n");
 		return 0;
 	}
-	fprintf(file, "%s\n", content);
+	fprintf(file, "%s\n%s\n%s\n", "**************************", content, "**************************");
 	fclose(file);
 }

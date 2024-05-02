@@ -5,13 +5,19 @@
  * Return - a String of the data retrieved and parsed
  */
 
-void handle_single_quote()
+void handle_custom_number_quotes()
 {
-	CURL *curl;
+	CURL *curl = NULL;
 	CURLcode response;
-	char *sendOUtData;
-
+	char num = '0';
+	char *sendOUtData = NULL;
+	int number;
 	string data_struct;
+
+	printf("\nHow many quotes will you like? ");
+	scanf(" %c", &num);
+	number = atoi(&num);
+
 	data_struct.data = malloc(1);
 	data_struct.len = 0;
 
@@ -24,18 +30,19 @@ void handle_single_quote()
 		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
 		curl_easy_setopt(curl, CURLOPT_WRITEDATA, &data_struct);
 
-		response = curl_easy_perform(curl);
+		while (number > 0)
+		{
+			response = curl_easy_perform(curl);
+			sendOUtData = parse_result(data_struct.data);
 
-		sendOUtData = parse_result(data_struct.data);
+			printf("\n***********************************");
+			printf("\n%s\n", sendOUtData);
+			printf("***********************************\n");
 
-		system("clear");
-		printf("\n***********************************");
-		printf("\n%s\n", sendOUtData);
-		printf("***********************************\n");
-
-		free(sendOUtData);
-		sendOUtData = NULL;
-
+			free(sendOUtData);
+			sendOUtData = NULL;
+			number--;
+		}
 		curl_easy_cleanup(curl);
 		return;
 	}

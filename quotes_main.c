@@ -21,7 +21,7 @@ int main(int argc, char const **argv)
 
 		// Retrieve User's choice
 		scanf(" %c", &user_option);
-		printf("\n\t");
+		printf("\n");
 
 		system("clear");
 
@@ -32,23 +32,19 @@ int main(int argc, char const **argv)
 			printf("Loading quotes...\n");
 			handle_single_quote();
 			break;
+
 		case '2':
-			printf("User wants Multiple Random Quotes");
+			handle_custom_number_quotes();
 			break;
+
 		case '3':
-			printf("Save a Single Quote to File");
+			handle_custom_number_quotes_to_file();
 			break;
-		case '4':
-			printf("User wants multiple quotes saved to a file");
-			break;
+
 		default:
 			continue_prog = 0;
 			break;
 		}
-		// system("clear");
-		// printf("\nPick Option again for a new quote.\n");
-		// scanf("%c", &user_option);
-		// print_fake_app_loading();
 	}
 	printf("\n");
 
