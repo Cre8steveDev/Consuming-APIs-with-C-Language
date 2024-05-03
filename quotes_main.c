@@ -9,13 +9,11 @@
 
 int main(int argc, char const **argv)
 {
-	/** Start definition of the app logic */
 	int continue_prog = 1;
 	char *temp = NULL;
 
 	while (continue_prog)
 	{
-
 		print_initial_ui();
 		char user_option = 'x';
 
@@ -24,7 +22,6 @@ int main(int argc, char const **argv)
 		printf("\n");
 
 		system("clear");
-
 		// Match the choice to an action
 		switch (user_option)
 		{
@@ -47,6 +44,5 @@ int main(int argc, char const **argv)
 		}
 	}
 	printf("\n");
-
 	return 0;
 }

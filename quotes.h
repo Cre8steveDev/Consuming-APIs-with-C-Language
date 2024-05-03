@@ -17,24 +17,22 @@ typedef struct
 	size_t len;
 } string;
 
-/**
- * Installation of the libcurl library
- * sudo apt-get install libcurl4-gnutls-dev
- */
 #include <curl/curl.h>
+#include <jansson.h>
 
 /**
  * HeaderFile for Write Function and others
  */
+size_t write_callback(char *ptr, size_t size, size_t nmemb, void *data_struct);
+
 void print_fake_app_loading(void);
 void print_initial_ui(void);
 char *parse_result(char *result);
-void print_with_max_line_length(const char *str, int max_line_length);
 
-size_t write_callback(char *ptr, size_t size, size_t nmemb, void *data_struct);
 void handle_single_quote();
 void handle_custom_number_quotes();
 void handle_custom_number_quotes_to_file();
+
 int write_to_file(char *file_name, char *content);
 
 #endif /**Quotes Header File*/
